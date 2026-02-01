@@ -23,9 +23,10 @@ export function HeroSection({
           alt=""
           fill
           sizes="100vw"
-          className="object-contain object-center opacity-10"
+          className="object-fill opacity-10"
           priority
         />
+        <div className="absolute inset-0 bg-background/60" />
       </div>
 
       <div className="mx-auto w-full max-w-[85%] px-6">
