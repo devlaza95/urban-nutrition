@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/landing/hero-section";
 import { BenefitsStrip } from "@/components/landing/benefits-strip";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
 import { ProteinSection } from "../components/landing/protein-section";
+import { ProteinVsWheySection } from "../components/landing/protein-vs-whey-section";
 import {
   landingPageQuery,
   productsQuery,
@@ -42,6 +43,7 @@ export default async function Home() {
         <BenefitsStrip />
         <TestimonialsSection testimonials={testimonials} />
         <ProteinSection product={product} />
+        <ProteinVsWheySection />
       </main>
     </div>
   );

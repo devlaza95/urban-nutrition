@@ -40,7 +40,7 @@ export function HeroSection({
             <h1
               className={cn(
                 anton.className,
-                "text-brand text-5xl leading-[1.14] tracking-[0.08em] uppercase sm:text-6xl lg:text-[100px] lg:tracking-[0.1495em]",
+                "text-brand leading-[1.14] tracking-[0.08em] uppercase lg:text-[90px] lg:tracking-[0.1495em]",
               )}
             >
               {landingPage?.hero?.headline || "Urban Nutrition"}
