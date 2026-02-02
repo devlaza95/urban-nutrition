@@ -42,7 +42,7 @@ function BenefitItem({ icon, label }: Benefit) {
 
 export function BenefitsStrip() {
   return (
-    <section aria-label="Benefits strip" className="mt-28">
+    <section aria-label="Benefits strip" className="mt-30">
       <div className="mx-auto w-full max-w-[85%] px-6">
         <h2
           className={cn(
@@ -60,7 +60,7 @@ export function BenefitsStrip() {
           alt=""
           aria-hidden
           priority
-          className="pointer-events-none absolute bottom-0 -left-10 h-auto w-[180px] lg:w-[380px] lg:-translate-x-16"
+          className="pointer-events-none absolute -bottom-20 -left-30 h-auto w-[280px] lg:w-[480px]"
         />
 
         <div className="mx-auto w-full max-w-[85%] px-6 py-10 pl-[110px] sm:pl-[220px] md:pl-[260px] lg:pl-[320px]">
