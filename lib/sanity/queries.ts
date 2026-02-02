@@ -53,5 +53,6 @@ export const whoIsItForItemsQuery = `*[_type == "whoIsItForItem"] | order(order 
   _id,
   title,
   description,
+  image,
   order
 }`;

@@ -5,33 +5,44 @@ import { BenefitsStrip } from "@/components/landing/benefits-strip";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
 import { ProteinSection } from "../components/landing/protein-section";
 import { ProteinVsWheySection } from "../components/landing/protein-vs-whey-section";
+import { WhoIsItForSection } from "../components/landing/who-is-it-for-section";
 import {
   landingPageQuery,
   productsQuery,
   testimonialsQuery,
+  whoIsItForItemsQuery,
 } from "@/lib/sanity/queries";
-import type { LandingPage, Product, Testimonial } from "@/lib/sanity/types";
+import type {
+  LandingPage,
+  Product,
+  Testimonial,
+  WhoIsItForItem,
+} from "@/lib/sanity/types";
 
 async function getPageData() {
   try {
-    const [landingPage, testimonials, products] = await Promise.all([
-      sanityClient.fetch<LandingPage | null>(landingPageQuery),
-      sanityClient.fetch<Testimonial[]>(testimonialsQuery),
-      sanityClient.fetch<Product[]>(productsQuery),
-    ]);
-    return { landingPage, testimonials, products };
+    const [landingPage, testimonials, products, whoIsItForItems] =
+      await Promise.all([
+        sanityClient.fetch<LandingPage | null>(landingPageQuery),
+        sanityClient.fetch<Testimonial[]>(testimonialsQuery),
+        sanityClient.fetch<Product[]>(productsQuery),
+        sanityClient.fetch<WhoIsItForItem[]>(whoIsItForItemsQuery),
+      ]);
+    return { landingPage, testimonials, products, whoIsItForItems };
   } catch (error) {
     console.error("Error fetching CMS data:", error);
     return {
       landingPage: null,
       testimonials: [],
       products: [],
+      whoIsItForItems: [],
     };
   }
 }
 
 export default async function Home() {
-  const { landingPage, testimonials, products } = await getPageData();
+  const { landingPage, testimonials, products, whoIsItForItems } =
+    await getPageData();
   const product = products?.[0] ?? null;
 
   return (
@@ -44,6 +55,7 @@ export default async function Home() {
         <TestimonialsSection testimonials={testimonials} />
         <ProteinSection product={product} />
         <ProteinVsWheySection />
+        <WhoIsItForSection items={whoIsItForItems} />
       </main>
     </div>
   );

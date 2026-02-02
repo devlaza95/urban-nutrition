@@ -60,5 +60,6 @@ export type WhoIsItForItem = {
   _id: string;
   title?: string;
   description?: unknown;
+  image?: SanityImageSource;
   order?: number;
 };
