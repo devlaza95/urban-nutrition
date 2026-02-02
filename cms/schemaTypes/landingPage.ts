@@ -107,6 +107,72 @@ export default defineType({
       type: 'array',
       of: portableTextOf,
     }),
+    defineField({
+      name: 'footer',
+      title: 'Footer',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'socialLinks',
+          title: 'Social Links',
+          type: 'array',
+          of: [
+            {
+              name: 'socialLink',
+              title: 'Social Link',
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'platform',
+                  title: 'Platform',
+                  type: 'string',
+                  options: {
+                    list: [
+                      {title: 'Facebook', value: 'facebook'},
+                      {title: 'Instagram', value: 'instagram'},
+                      {title: 'YouTube', value: 'youtube'},
+                      {title: 'LinkedIn', value: 'linkedin'},
+                      {title: 'X (Twitter)', value: 'x'},
+                      {title: 'TikTok', value: 'tiktok'},
+                    ],
+                    layout: 'dropdown',
+                  },
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: 'url',
+                  title: 'URL',
+                  type: 'url',
+                  validation: (Rule) => Rule.required(),
+                }),
+              ],
+            },
+          ],
+        }),
+        defineField({
+          name: 'contact',
+          title: 'Contact',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'phone',
+              title: 'Phone',
+              type: 'string',
+            }),
+            defineField({
+              name: 'email',
+              title: 'Email',
+              type: 'string',
+            }),
+            defineField({
+              name: 'location',
+              title: 'Location',
+              type: 'string',
+            }),
+          ],
+        }),
+      ],
+    }),
   ],
   preview: {
     prepare() {

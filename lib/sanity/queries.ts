@@ -8,7 +8,18 @@ export const landingPageQuery = `*[_type == "landingPage"][0]{
   nutritionInfo,
   allergiesInfo,
   deliveryInfo,
-  returnsInfo
+  returnsInfo,
+  footer{
+    socialLinks[]{
+      platform,
+      url
+    },
+    contact{
+      phone,
+      email,
+      location
+    }
+  }
 }`;
 
 export const testimonialsQuery = `*[_type == "testimonial"] | order(_createdAt desc){

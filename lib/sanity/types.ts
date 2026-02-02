@@ -10,6 +10,23 @@ export type LandingPage = {
   allergiesInfo?: unknown;
   deliveryInfo?: unknown;
   returnsInfo?: unknown;
+  footer?: {
+    socialLinks?: Array<{
+      platform?:
+        | "facebook"
+        | "instagram"
+        | "youtube"
+        | "linkedin"
+        | "x"
+        | "tiktok";
+      url?: string;
+    }>;
+    contact?: {
+      phone?: string;
+      email?: string;
+      location?: string;
+    };
+  };
 };
 
 export type Testimonial = {
