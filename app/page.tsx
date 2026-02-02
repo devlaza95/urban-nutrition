@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/site-header";
 import { sanityClient } from "@/lib/sanity/client";
 import { HeroSection } from "@/components/landing/hero-section";
+import { BenefitsStrip } from "@/components/landing/benefits-strip";
 import { landingPageQuery } from "@/lib/sanity/queries";
 import type { LandingPage } from "@/lib/sanity/types";
 
@@ -27,6 +28,7 @@ export default async function Home() {
 
       <main className="w-full py-12">
         <HeroSection landingPage={landingPage} />
+        <BenefitsStrip />
       </main>
     </div>
   );
