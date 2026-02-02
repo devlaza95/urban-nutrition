@@ -6,13 +6,16 @@ import { TestimonialsSection } from "@/components/landing/testimonials-section";
 import { ProteinSection } from "../components/landing/protein-section";
 import { ProteinVsWheySection } from "../components/landing/protein-vs-whey-section";
 import { WhoIsItForSection } from "../components/landing/who-is-it-for-section";
+import { FaqSection } from "../components/landing/faq-section";
 import {
+  faqItemsQuery,
   landingPageQuery,
   productsQuery,
   testimonialsQuery,
   whoIsItForItemsQuery,
 } from "@/lib/sanity/queries";
 import type {
+  FaqItem,
   LandingPage,
   Product,
   Testimonial,
@@ -21,14 +24,15 @@ import type {
 
 async function getPageData() {
   try {
-    const [landingPage, testimonials, products, whoIsItForItems] =
+    const [landingPage, testimonials, products, whoIsItForItems, faqItems] =
       await Promise.all([
         sanityClient.fetch<LandingPage | null>(landingPageQuery),
         sanityClient.fetch<Testimonial[]>(testimonialsQuery),
         sanityClient.fetch<Product[]>(productsQuery),
         sanityClient.fetch<WhoIsItForItem[]>(whoIsItForItemsQuery),
+        sanityClient.fetch<FaqItem[]>(faqItemsQuery),
       ]);
-    return { landingPage, testimonials, products, whoIsItForItems };
+    return { landingPage, testimonials, products, whoIsItForItems, faqItems };
   } catch (error) {
     console.error("Error fetching CMS data:", error);
     return {
@@ -36,12 +40,13 @@ async function getPageData() {
       testimonials: [],
       products: [],
       whoIsItForItems: [],
+      faqItems: [],
     };
   }
 }
 
 export default async function Home() {
-  const { landingPage, testimonials, products, whoIsItForItems } =
+  const { landingPage, testimonials, products, whoIsItForItems, faqItems } =
     await getPageData();
   const product = products?.[0] ?? null;
 
@@ -56,6 +61,7 @@ export default async function Home() {
         <ProteinSection product={product} />
         <ProteinVsWheySection />
         <WhoIsItForSection items={whoIsItForItems} />
+        <FaqSection items={faqItems} />
       </main>
     </div>
   );
