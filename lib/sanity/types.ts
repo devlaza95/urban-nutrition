@@ -44,6 +44,7 @@ export type Product = {
   price?: number;
   shortDescription?: string;
   description?: unknown;
+  productInformation?: unknown;
   allergiesInfo?: unknown;
   rating?: number;
   images?: SanityImageSource[];

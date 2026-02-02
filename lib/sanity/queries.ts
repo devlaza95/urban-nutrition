@@ -37,6 +37,7 @@ export const productsQuery = `*[_type == "product"] | order(_createdAt desc){
   price,
   shortDescription,
   description,
+  productInformation,
   allergiesInfo,
   rating,
   images

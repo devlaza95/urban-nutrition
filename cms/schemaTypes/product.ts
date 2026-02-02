@@ -82,6 +82,14 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'productInformation',
+      title: 'Product Information',
+      type: 'array',
+      of: portableTextOf,
+      description:
+        'Rich text block for product details (packaging, portion, macros, allergens, etc.)',
+    }),
+    defineField({
       name: 'allergiesInfo',
       title: 'Allergies Info',
       type: 'array',
