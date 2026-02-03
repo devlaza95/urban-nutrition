@@ -11,6 +11,15 @@ Set these in `.env.local` (and in the **App** Vercel project):
 - `NEXT_PUBLIC_SANITY_PROJECT_ID`
 - `NEXT_PUBLIC_SANITY_DATASET` (usually `production`)
 
+**Contact form (SMTP):** For the contact page to send emails, set in `.env.local` (do not commit):
+
+- `SMTP_HOST` (e.g. `smtp.gmail.com`)
+- `SMTP_PORT` (e.g. `465`)
+- `SMTP_USER`
+- `SMTP_PASS`
+- `MAIL_FROM` (e.g. `Urban Nutrition <info@example.com>`)
+- `MAIL_TO_OFFICE` (address that receives contact form notifications)
+
 ### CMS (Sanity Studio, `cms/`)
 
 Set these in `.env.local` inside `cms/` (and in the **CMS** Vercel project):

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import * as LucideIcons from "lucide-react";
 
 import { anton, inter } from "@/lib/fonts";
@@ -9,14 +10,19 @@ type SocialPlatform = NonNullable<
   NonNullable<LandingPage["footer"]>["socialLinks"]
 >[number]["platform"];
 
-const FOOTER_LINKS: Array<{ label: string; href: `#${string}` }> = [
+const FOOTER_LINKS: Array<{ label: string; href: string }> = [
   { label: "Početna", href: "#pocetna" },
   { label: "Zadovoljni klijenti", href: "#zadovoljni-klijenti" },
   { label: "Kome je namenjen", href: "#kome-je-namenjen" },
   { label: "Protein", href: "#protein" },
   { label: "FAQ", href: "#faq" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Kontakt", href: "/contact" },
 ];
+
+/** Hash links live on home; from other pages navigate to /#section. */
+function resolveNavHref(href: string): string {
+  return href.startsWith("#") ? `/${href}` : href;
+}
 
 function getSocialIcon(platform: SocialPlatform | undefined) {
   const icons = LucideIcons as unknown as Record<string, unknown>;
@@ -133,16 +139,16 @@ export function SiteFooter({
               </h3>
               <nav className="flex flex-col gap-3" aria-label="Footer">
                 {FOOTER_LINKS.map((link) => (
-                  <a
+                  <Link
                     key={link.href}
-                    href={link.href}
+                    href={resolveNavHref(link.href)}
                     className={cn(
                       inter.className,
                       "text-[14px] leading-[14px] tracking-[-0.2px] font-normal text-white/90 transition-opacity hover:opacity-80",
                     )}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>

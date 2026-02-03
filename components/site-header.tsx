@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { MenuIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -15,7 +16,7 @@ import {
 
 type NavItem = {
   label: string;
-  href: `#${string}`;
+  href: string;
 };
 
 const NAV_ITEMS: NavItem[] = [
@@ -24,8 +25,18 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Protein", href: "#protein" },
   { label: "Kome je namenjen", href: "#kome-je-namenjen" },
   { label: "FAQ", href: "#faq" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Kontakt", href: "/contact" },
 ];
+
+/** Hash links live on home; from other pages navigate to /#section so the section is reachable. */
+function resolveNavHref(href: string): string {
+  return href.startsWith("#") ? `/${href}` : href;
+}
+
+const linkClass =
+  "rounded-md px-2 py-2 text-base font-medium text-foreground transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50";
+const mobileLinkClass =
+  "rounded-md px-3 py-2 text-base font-medium text-foreground/90 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50";
 
 export function SiteHeader({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false);
@@ -33,8 +44,8 @@ export function SiteHeader({ className }: { className?: string }) {
   return (
     <header className={cn("sticky top-0 z-50 w-full bg-background", className)}>
       <div className="mx-auto flex h-24 w-full max-w-[95%] lg:max-w-[85%] items-center justify-between gap-6 px-4">
-        <a
-          href="#pocetna"
+        <Link
+          href="/"
           className="flex items-center gap-3 rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
           aria-label="Urban Nutrition - Početna"
         >
@@ -46,17 +57,17 @@ export function SiteHeader({ className }: { className?: string }) {
             priority
             className="h-10 w-auto md:h-12"
           />
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-6 md:flex" aria-label="Primary">
           {NAV_ITEMS.map((item) => (
-            <a
+            <Link
               key={item.href}
-              href={item.href}
-              className="rounded-md px-2 py-2 text-base font-medium text-foreground transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+              href={resolveNavHref(item.href)}
+              className={linkClass}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -65,7 +76,7 @@ export function SiteHeader({ className }: { className?: string }) {
             asChild
             className="inline-flex h-12 rounded-full px-8 text-base font-semibold"
           >
-            <a href="#protein">KUPI PROTEIN</a>
+            <Link href="/#protein">KUPI PROTEIN</Link>
           </Button>
 
           <Sheet open={open} onOpenChange={setOpen}>
@@ -83,8 +94,8 @@ export function SiteHeader({ className }: { className?: string }) {
             <SheetContent side="right" className="p-0">
               <div className="flex h-full flex-col p-6">
                 <div className="flex items-center justify-between gap-4">
-                  <a
-                    href="#pocetna"
+                  <Link
+                    href="/"
                     className="flex items-center gap-3 rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
                     aria-label="Urban Nutrition - Početna"
                     onClick={() => setOpen(false)}
@@ -96,18 +107,18 @@ export function SiteHeader({ className }: { className?: string }) {
                       height={44}
                       className="h-8 w-auto"
                     />
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="mt-8 flex flex-col gap-1">
                   {NAV_ITEMS.map((item) => (
                     <SheetClose asChild key={item.href}>
-                      <a
-                        href={item.href}
-                        className="rounded-md px-3 py-2 text-base font-medium text-foreground/90 transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                      <Link
+                        href={resolveNavHref(item.href)}
+                        className={mobileLinkClass}
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     </SheetClose>
                   ))}
                 </div>
@@ -118,7 +129,7 @@ export function SiteHeader({ className }: { className?: string }) {
                       asChild
                       className="h-12 w-full rounded-full text-base font-semibold"
                     >
-                      <a href="#protein">KUPI PROTEIN</a>
+                      <Link href="/#protein">KUPI PROTEIN</Link>
                     </Button>
                   </SheetClose>
                 </div>

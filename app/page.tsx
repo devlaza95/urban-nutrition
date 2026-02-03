@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/site-header";
 import { sanityClient } from "@/lib/sanity/client";
+import { ScrollToHash } from "@/components/scroll-to-hash";
 import { HeroSection } from "@/components/landing/hero-section";
 import { BenefitsStrip } from "@/components/landing/benefits-strip";
 import { TestimonialsSection } from "@/components/landing/testimonials-section";
@@ -52,8 +52,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SiteHeader />
-
+      <ScrollToHash />
       <main className="w-full py-12">
         <HeroSection landingPage={landingPage} />
         <BenefitsStrip />
