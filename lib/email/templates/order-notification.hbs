@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #111827; max-width: 600px; margin: 0 auto; padding: 20px;">
+    <div style="margin-bottom: 24px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="font-size: 24px;">🛒</div>
+        <h2 style="color: #65609d; font-size: 24px; font-weight: 600; margin: 0;">Nova narudžbina</h2>
+        <div style="background: #65609d; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase;">
+          Nova narudžbina
+        </div>
+      </div>
+      <p style="color: #6b7280; font-size: 14px; margin: 0;">Datum: <strong style="color: #111827;">{{submittedDate}}</strong></p>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #f5f4fa 0%, #ebe9f5 100%); border: 1px solid #e2e0ec; border-radius: 12px; padding: 24px; margin: 24px 0;">
+      <h3 style="color: #65609d; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">Primalac računa</h3>
+      <div style="display: grid; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
+          <span style="color: #6b7280; font-weight: 500; font-size: 14px;">Ime i prezime</span>
+          <span style="color: #111827; font-weight: 600;">{{ime}} {{prezime}}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
+          <span style="color: #6b7280; font-weight: 500; font-size: 14px;">Ulica i broj</span>
+          <span style="color: #111827;">{{ulicaIBroj}}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
+          <span style="color: #6b7280; font-weight: 500; font-size: 14px;">Poštanski broj, grad, država</span>
+          <span style="color: #111827;">{{postanskiBroj}}, {{grad}}, {{drzava}}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
+          <span style="color: #6b7280; font-weight: 500; font-size: 14px;">Email</span>
+          <a href="mailto:{{email}}" style="color: #65609d; text-decoration: none; font-weight: 600;">{{email}}</a>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
+          <span style="color: #6b7280; font-weight: 500; font-size: 14px;">Telefon</span>
+          <span style="color: #111827;">{{telefon}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #f5f4fa 0%, #ebe9f5 100%); border: 1px solid #e2e0ec; border-radius: 12px; padding: 24px; margin: 24px 0;">
+      <h3 style="color: #65609d; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">Stavke narudžbine</h3>
+      <div style="border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <thead>
+            <tr style="background: #65609d; color: white;">
+              <th style="text-align: left; padding: 12px;">Proizvod</th>
+              <th style="text-align: center; padding: 12px;">Količina</th>
+              <th style="text-align: right; padding: 12px;">Cena</th>
+              <th style="text-align: right; padding: 12px;">Ukupno</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each items}}
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+              <td style="padding: 12px;">{{this.name}}</td>
+              <td style="text-align: center; padding: 12px;">{{this.quantity}}</td>
+              <td style="text-align: right; padding: 12px;">{{this.price}} RSD</td>
+              <td style="text-align: right; padding: 12px; font-weight: 600;">{{this.total}} RSD</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <p style="margin: 12px 0 0 0; font-size: 14px; color: #6b7280;">+ dostava {{deliveryCost}} RSD</p>
+      <p style="margin: 4px 0 0 0; font-size: 18px; font-weight: 600; color: #111827;">Ukupno: {{totalWithDelivery}} RSD</p>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #f5f4fa 0%, #ebe9f5 100%); border: 1px solid #e2e0ec; border-radius: 12px; padding: 24px; margin: 24px 0;">
+      <h3 style="color: #65609d; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">Način isporuke i plaćanja</h3>
+      <p style="margin: 0 0 8px 0;">Način isporuke: <strong>Kurirska služba BEX</strong></p>
+      <p style="margin: 0;">Način plaćanja: <strong>{{paymentMethod}}</strong></p>
+    </div>
+
+    {{#if napomena}}
+    <div style="background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 8px; padding: 16px; margin: 24px 0;">
+      <h3 style="color: #92400e; font-size: 16px; font-weight: 600; margin: 0 0 8px 0;">Napomena uz narudžbinu</h3>
+      <p style="color: #92400e; font-size: 14px; line-height: 1.6; margin: 0; white-space: pre-wrap;">{{napomena}}</p>
+    </div>
+    {{/if}}
+
+    <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
+      <p style="color: #6b7280; font-size: 12px; line-height: 1.6; margin: 0;">
+        Automatska obaveštenja sa forme za narudžbinu Urban Nutrition.
+      </p>
+    </div>
+  </body>
+</html>

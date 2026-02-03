@@ -43,6 +43,14 @@ export const productsQuery = `*[_type == "product"] | order(_createdAt desc){
   images
 }`;
 
+export const productByIdsQuery = `*[_type == "product" && (_id in $ids || _id in $draftIds)]{
+  _id,
+  name,
+  price,
+  shortDescription,
+  images
+}`;
+
 export const faqItemsQuery = `*[_type == "faqItem"] | order(_createdAt desc){
   _id,
   title,

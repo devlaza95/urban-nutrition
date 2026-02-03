@@ -3,10 +3,11 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, ShoppingCart } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useCartStore } from "@/lib/cart/store";
 import {
   Sheet,
   SheetClose,
@@ -40,6 +41,8 @@ const mobileLinkClass =
 
 export function SiteHeader({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false);
+  const items = useCartStore((s) => s.items);
+  const cartCount = items.reduce((sum, i) => sum + i.quantity, 0);
 
   return (
     <header className={cn("sticky top-0 z-50 w-full bg-background", className)}>
@@ -74,9 +77,30 @@ export function SiteHeader({ className }: { className?: string }) {
         <div className="flex items-center gap-2">
           <Button
             asChild
+            variant="ghost"
+            size="icon"
+            className="relative h-12 w-12 rounded-full"
+            aria-label={cartCount > 0 ? `Korpa (${cartCount} stavki)` : "Korpa"}
+          >
+            <Link href="/cart">
+              <ShoppingCart className="size-6" />
+              {cartCount > 0 && (
+                <span
+                  className={cn(
+                    "absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#65609d] px-1.5 text-xs font-semibold text-white",
+                    cartCount > 99 && "min-w-6 px-1 text-[10px]",
+                  )}
+                >
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
+            </Link>
+          </Button>
+          <Button
+            asChild
             className="inline-flex h-12 rounded-full px-8 text-base font-semibold"
           >
-            <Link href="/#protein">KUPI PROTEIN</Link>
+            <Link href="/cart">KUPI PROTEIN</Link>
           </Button>
 
           <Sheet open={open} onOpenChange={setOpen}>
@@ -123,13 +147,24 @@ export function SiteHeader({ className }: { className?: string }) {
                   ))}
                 </div>
 
-                <div className="mt-auto pt-6">
+                <div className="mt-auto flex flex-col gap-3 pt-6">
+                  {cartCount > 0 && (
+                    <SheetClose asChild>
+                      <Link
+                        href="/cart"
+                        className="flex items-center justify-center gap-2 rounded-full border border-border bg-secondary/50 py-3 text-base font-medium"
+                      >
+                        <ShoppingCart className="size-5" />
+                        Korpa ({cartCount})
+                      </Link>
+                    </SheetClose>
+                  )}
                   <SheetClose asChild>
                     <Button
                       asChild
                       className="h-12 w-full rounded-full text-base font-semibold"
                     >
-                      <Link href="/#protein">KUPI PROTEIN</Link>
+                      <Link href="/cart">KUPI PROTEIN</Link>
                     </Button>
                   </SheetClose>
                 </div>
