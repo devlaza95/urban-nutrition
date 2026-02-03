@@ -2,7 +2,7 @@ import Image from "next/image";
 import { PortableTextRenderer } from "@/components/portable-text";
 import { ProductImageSwitcher } from "@/components/products/product-image-switcher";
 import { RatingStars } from "@/components/ui/rating-stars";
-import { Button } from "@/components/ui/button";
+import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { anton, inter } from "@/lib/fonts";
@@ -103,9 +103,7 @@ export function ProteinSection({ product }: { product: Product | null }) {
                   />
                 </div>
 
-                <Button className="h-12 rounded-full px-10 text-base font-semibold">
-                  KUPI PROTEIN
-                </Button>
+                <AddToCartButton productId={product._id} />
 
                 <Separator className="my-4 bg-foreground" />
 

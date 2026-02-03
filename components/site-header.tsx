@@ -76,7 +76,7 @@ export function SiteHeader({ className }: { className?: string }) {
             asChild
             className="inline-flex h-12 rounded-full px-8 text-base font-semibold"
           >
-            <Link href="/#protein">KUPI PROTEIN</Link>
+            <Link href="/cart">KUPI PROTEIN</Link>
           </Button>
 
           <Sheet open={open} onOpenChange={setOpen}>
@@ -129,7 +129,7 @@ export function SiteHeader({ className }: { className?: string }) {
                       asChild
                       className="h-12 w-full rounded-full text-base font-semibold"
                     >
-                      <Link href="/#protein">KUPI PROTEIN</Link>
+                      <Link href="/cart">KUPI PROTEIN</Link>
                     </Button>
                   </SheetClose>
                 </div>
