@@ -21,17 +21,17 @@ const benefits: Benefit[] = [
 
 function BenefitItem({ icon, label }: Benefit) {
   return (
-    <div className="flex flex-col items-center gap-3 text-center">
+    <div className="flex flex-col items-center gap-1 text-center md:gap-3">
       <Image
         src={icon}
         alt=""
         aria-hidden
-        className="h-14 w-14 md:h-16 md:w-16"
+        className="h-10 w-10 md:h-14 md:w-14 lg:h-16 lg:w-16"
       />
       <p
         className={cn(
           inter.className,
-          "text-[20px] leading-[40px] tracking-[0px] font-semibold text-foreground",
+          "text-[10px] leading-[14.3px] font-semibold tracking-[0px] text-center text-foreground md:text-[20px] md:leading-[40px]",
         )}
       >
         {label}
@@ -47,7 +47,7 @@ export function BenefitsStrip() {
         <h2
           className={cn(
             anton.className,
-            "text-center text-[36px] leading-[28px] tracking-[12px] font-normal uppercase text-foreground",
+            "text-center text-[24px] leading-[32px] tracking-[8px] font-normal uppercase text-foreground md:text-[36px] md:leading-[28px] md:tracking-[12px]",
           )}
         >
           NOVA DIMENZIJA PRIRODNOG PROTEINA
@@ -60,11 +60,11 @@ export function BenefitsStrip() {
           alt=""
           aria-hidden
           priority
-          className="pointer-events-none absolute -bottom-20 -left-30 h-auto w-[280px] lg:w-[480px]"
+          className="pointer-events-none absolute -bottom-44 md:-bottom-20 -left-18 md:-left-30 h-auto w-[280px] lg:w-[480px]"
         />
 
-        <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4 py-10 pl-[110px] sm:pl-[220px] md:pl-[260px] lg:pl-[320px]">
-          <div className="grid gap-10 sm:grid-cols-3 sm:gap-6 md:gap-10">
+        <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4 py-6 pl-0 md:py-10 md:pl-[260px] lg:pl-[320px]">
+          <div className="grid grid-cols-3 gap-4 md:gap-6 lg:gap-10">
             {benefits.map((benefit) => (
               <BenefitItem key={benefit.label} {...benefit} />
             ))}
