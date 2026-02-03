@@ -41,7 +41,7 @@ export function ProductImageSwitcher({
   return (
     <div className={cn("space-y-4", className)}>
       <div className="relative overflow-hidden rounded-3xl bg-muted">
-        <div className="relative aspect-[4/3] w-full">
+        <div className="relative aspect-[3/3] md:aspect-[4/3] w-full">
           <Image
             src={urlFor(activeImage).width(1400).height(1050).fit("crop").url()}
             alt={getAlt(activeImage, productName)}

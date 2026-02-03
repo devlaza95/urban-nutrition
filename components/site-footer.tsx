@@ -61,9 +61,25 @@ export function SiteFooter({
           priority={false}
         />
       </div>
+      <div className="absolute right-4 top-24 z-10 flex flex-wrap items-center gap-6 sm:right-6 sm:top-28 lg:right-[7.5%] lg:top-16">
+        <Image
+          src="/Slika%20hero%202.png"
+          alt="Certification badge"
+          width={128}
+          height={128}
+          className="h-16 w-16 sm:h-20 sm:w-20"
+        />
+        <Image
+          src="/brcs.png"
+          alt="BRCS certified"
+          width={128}
+          height={128}
+          className="h-auto w-[100px]"
+        />
+      </div>
 
       <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4 pb-20 pt-14 lg:pt-24">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr_0.9fr] lg:items-start">
+        <div className="grid gap-12 lg:grid-cols-4 lg:items-start">
           <div className="space-y-6">
             <Image
               src="/Logo.png"
@@ -105,81 +121,66 @@ export function SiteFooter({
             ) : null}
           </div>
 
-          <div className="space-y-5">
-            <div
-              className={cn(
-                anton.className,
-                "text-[18px] leading-[18px] tracking-[-0.2px] font-normal text-white",
-              )}
-            >
-              Korisni linkovi
-            </div>
-            <nav className="flex flex-col gap-3" aria-label="Footer">
-              {FOOTER_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    inter.className,
-                    "text-[14px] leading-[14px] tracking-[-0.2px] font-normal text-white/90 transition-opacity hover:opacity-80",
-                  )}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-
-          <div className="space-y-5">
-            <div
-              className={cn(
-                anton.className,
-                "text-[18px] leading-[18px] tracking-[-0.2px] font-normal text-white",
-              )}
-            >
-              Kontaktirajte nas
+          <div className="flex flex-row gap-0 justify-between md:justify-start md:gap-16">
+            <div className="space-y-5 min-w-0">
+              <h3
+                className={cn(
+                  anton.className,
+                  "text-[18px] leading-[18px] tracking-[-0.2px] font-normal text-white",
+                )}
+              >
+                Korisni linkovi
+              </h3>
+              <nav className="flex flex-col gap-3" aria-label="Footer">
+                {FOOTER_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      inter.className,
+                      "text-[14px] leading-[14px] tracking-[-0.2px] font-normal text-white/90 transition-opacity hover:opacity-80",
+                    )}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
             </div>
 
-            <div className={cn(inter.className, "space-y-3 text-white/90")}>
-              {contact?.phone ? (
-                <a
-                  href={`tel:${contact.phone}`}
-                  className="block text-[14px] leading-[14px] tracking-[-0.2px] hover:opacity-80"
-                >
-                  {contact.phone}
-                </a>
-              ) : null}
-              {contact?.email ? (
-                <a
-                  href={`mailto:${contact.email}`}
-                  className="block text-[14px] leading-[14px] tracking-[-0.2px] hover:opacity-80"
-                >
-                  {contact.email}
-                </a>
-              ) : null}
-              {contact?.location ? (
-                <div className="text-[14px] leading-[14px] tracking-[-0.2px]">
-                  {contact.location}
-                </div>
-              ) : null}
-            </div>
-          </div>
+            <div className="space-y-5 min-w-0">
+              <h3
+                className={cn(
+                  anton.className,
+                  "text-[18px] leading-[18px] tracking-[-0.2px] font-normal text-white",
+                )}
+              >
+                Kontaktirajte nas
+              </h3>
 
-          <div className="flex items-start gap-6 lg:justify-end">
-            <Image
-              src="/Slika%20hero%202.png"
-              alt="Certification badge"
-              width={128}
-              height={128}
-              className="h-16 w-16 sm:h-20 sm:w-20"
-            />
-            <Image
-              src="/brcs.png"
-              alt="BRCS certified"
-              width={128}
-              height={128}
-              className="h-auto w-[100px]"
-            />
+              <div className={cn(inter.className, "space-y-3 text-white/90")}>
+                {contact?.phone ? (
+                  <a
+                    href={`tel:${contact.phone}`}
+                    className="block text-[14px] leading-[14px] tracking-[-0.2px] hover:opacity-80"
+                  >
+                    {contact.phone}
+                  </a>
+                ) : null}
+                {contact?.email ? (
+                  <a
+                    href={`mailto:${contact.email}`}
+                    className="block text-[14px] leading-[14px] tracking-[-0.2px] hover:opacity-80"
+                  >
+                    {contact.email}
+                  </a>
+                ) : null}
+                {contact?.location ? (
+                  <div className="text-[14px] leading-[14px] tracking-[-0.2px]">
+                    {contact.location}
+                  </div>
+                ) : null}
+              </div>
+            </div>
           </div>
         </div>
       </div>

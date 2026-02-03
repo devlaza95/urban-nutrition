@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PortableTextRenderer } from "@/components/portable-text";
 import { ProductImageSwitcher } from "@/components/products/product-image-switcher";
 import { RatingStars } from "@/components/ui/rating-stars";
@@ -17,12 +18,12 @@ function formatRsd(price: number) {
 
 export function ProteinSection({ product }: { product: Product | null }) {
   return (
-    <section id="protein" className="scroll-mt-24 mt-20 pt-4 bg-[#F2F1FF]">
+    <section id="protein" className="scroll-mt-24 mt-20 pt-8 bg-[#F2F1FF]">
       <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
         <h2
           className={cn(
             anton.className,
-            "text-center text-[46px] font-normal text-foreground",
+            "text-center text-[46px] leading-[83.72px] tracking-[0px] font-normal text-foreground md:leading-tight lg:leading-[1.2]",
           )}
         >
           Naruči proizvod
@@ -30,7 +31,7 @@ export function ProteinSection({ product }: { product: Product | null }) {
         <h3
           className={cn(
             inter.className,
-            "text-center text-[18px] leading-[83px] tracking-[0px] font-normal text-foreground",
+            "text-center text-[18px] leading-[1.5] tracking-[0px] font-normal text-foreground max-w-2xl mx-auto mt-2 md:mt-6",
           )}
         >
           Počni svoju rutinu već danas. Izaberi protein koji je jednostavan,
@@ -59,45 +60,54 @@ export function ProteinSection({ product }: { product: Product | null }) {
               <div className="space-y-5">
                 <RatingStars rating={product.rating} />
 
-                <div className="space-y-6">
-                  <div>
-                    <div
-                      className={cn(
-                        anton.className,
-                        "text-[32px] tracking-[0px] font-normal text-foreground",
-                      )}
-                    >
-                      {product.name}
-                    </div>
-
-                    {typeof product.price === "number" ? (
+                <div className="flex flex-row items-center justify-between">
+                  <div className="space-y-6">
+                    <div>
                       <div
                         className={cn(
                           anton.className,
-                          "text-brand text-[24px] tracking-[0px] font-normal",
+                          "text-[32px] tracking-[0px] font-normal text-foreground",
                         )}
                       >
-                        {formatRsd(product.price)}
+                        {product.name}
                       </div>
+
+                      {typeof product.price === "number" ? (
+                        <div
+                          className={cn(
+                            anton.className,
+                            "text-brand text-[24px] tracking-[0px] font-normal",
+                          )}
+                        >
+                          {formatRsd(product.price)}
+                        </div>
+                      ) : null}
+                    </div>
+                    {product.shortDescription ? (
+                      <p
+                        className={cn(
+                          inter.className,
+                          "text-[18px] leading-[18px] tracking-[0px] font-normal text-foreground",
+                        )}
+                      >
+                        {product.shortDescription}
+                      </p>
                     ) : null}
                   </div>
-                  {product.shortDescription ? (
-                    <p
-                      className={cn(
-                        inter.className,
-                        "text-[18px] leading-[18px] tracking-[0px] font-normal text-foreground",
-                      )}
-                    >
-                      {product.shortDescription}
-                    </p>
-                  ) : null}
+                  <Image
+                    src="/brcs.png"
+                    width={128}
+                    height={128}
+                    alt="BRCS certified"
+                    className="self-start"
+                  />
                 </div>
 
                 <Button className="h-12 rounded-full px-10 text-base font-semibold">
                   KUPI PROTEIN
                 </Button>
 
-                <Separator className="my-4" />
+                <Separator className="my-4 bg-foreground" />
 
                 <Tabs defaultValue="opis" className="w-full">
                   <TabsList variant="line" className="h-auto p-0 gap-6">

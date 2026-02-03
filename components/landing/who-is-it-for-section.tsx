@@ -77,8 +77,8 @@ export function WhoIsItForSection({ items }: { items: WhoIsItForItem[] }) {
         </p>
       </div>
 
-      <div className="mt-10">
-        <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
+      <div className="mt-10 overflow-hidden lg:overflow-visible">
+        <div className="w-screen relative left-1/2 -translate-x-1/2 lg:static lg:left-auto lg:translate-x-0 lg:mx-auto lg:w-full lg:max-w-[85%] lg:px-4">
           <Carousel
             setApi={setApi}
             opts={{ align: "start", loop: true, dragFree: true }}
