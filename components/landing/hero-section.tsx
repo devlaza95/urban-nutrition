@@ -29,18 +29,18 @@ export function HeroSection({
         <div className="absolute inset-0 bg-background/60" />
       </div>
 
-      <div className="mx-auto w-full max-w-[85%] px-6">
+      <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
           <div
             className={cn(
-              "relative z-10 flex flex-col items-center space-y-5 pt-16 text-center",
+              "relative z-10 flex flex-col items-center space-y-5 pt-4 md:pt-16 text-center",
               inter.className,
             )}
           >
             <h1
               className={cn(
                 anton.className,
-                "text-brand leading-[1.14] tracking-[0.08em] uppercase lg:text-[90px] lg:tracking-[0.1495em]",
+                "text-brand text-[59.87px] leading-[68.25px] tracking-[14px] text-center uppercase lg:text-[90px] lg:leading-[1.14] lg:tracking-[0.1495em]",
               )}
             >
               {landingPage?.hero?.headline || "Urban Nutrition"}
@@ -48,19 +48,22 @@ export function HeroSection({
 
             <PortableTextRenderer
               value={landingPage?.hero?.subheading}
-              className="max-w-xl space-y-3 text-base font-normal leading-7 lg:text-[18px] [&_p]:!text-foreground"
+              className={cn(
+                inter.className,
+                "max-w-xl space-y-3 text-[16px] leading-[16.76px] text-center lg:text-[18px] lg:leading-7 [&_p]:!text-foreground",
+              )}
             />
 
             {landingPage?.nutritionInfo ? (
               <PortableTextRenderer
                 value={landingPage.nutritionInfo}
-                className="max-w-xl text-[14px] font-normal leading-7 [&_p]:!text-foreground"
+                className="max-w-xs text-[16px] leading-[16.76px] text-center [&_p]:!text-foreground [&_p]:text-center"
               />
             ) : null}
 
             <Button
               asChild
-              className="mt-2 h-12 rounded-full px-10 text-base font-semibold"
+              className="mt-2 hidden h-12 rounded-full px-10 text-base font-semibold lg:inline-flex"
             >
               <a href="#protein">KUPI PROTEIN</a>
             </Button>
@@ -68,7 +71,7 @@ export function HeroSection({
             {landingPage?.allergiesInfo ? (
               <PortableTextRenderer
                 value={landingPage.allergiesInfo}
-                className="max-w-xl text-[14px] font-normal leading-7 [&_p]:!text-foreground"
+                className="max-w-xl text-md italic leading-[100%] align-middle [&_p]:!text-foreground [&_p]:italic"
               />
             ) : null}
           </div>
@@ -81,12 +84,12 @@ export function HeroSection({
                     src={urlFor(landingPage.hero.heroImage)
                       .width(1800)
                       .height(1200)
-                      .fit("clip")
+                      .fit("max")
                       .url()}
                     alt="Hero"
                     fill
                     sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-cover object-center"
+                    className="object-contain object-center"
                     priority
                   />
                 ) : (
@@ -95,6 +98,15 @@ export function HeroSection({
                   </div>
                 )}
               </div>
+            </div>
+
+            <div className="lg:hidden">
+              <Button
+                asChild
+                className="h-12 w-full rounded-full text-base font-semibold"
+              >
+                <a href="#protein">KUPI PROTEIN</a>
+              </Button>
             </div>
 
             <div className="space-y-2 text-base font-medium leading-none [&_p]:m-0 [&_p]:leading-none [&_p]:!text-foreground">

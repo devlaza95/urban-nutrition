@@ -43,7 +43,7 @@ function BenefitItem({ icon, label }: Benefit) {
 export function BenefitsStrip() {
   return (
     <section aria-label="Benefits strip" className="mt-30">
-      <div className="mx-auto w-full max-w-[85%] px-6">
+      <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
         <h2
           className={cn(
             anton.className,
@@ -63,7 +63,7 @@ export function BenefitsStrip() {
           className="pointer-events-none absolute -bottom-20 -left-30 h-auto w-[280px] lg:w-[480px]"
         />
 
-        <div className="mx-auto w-full max-w-[85%] px-6 py-10 pl-[110px] sm:pl-[220px] md:pl-[260px] lg:pl-[320px]">
+        <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4 py-10 pl-[110px] sm:pl-[220px] md:pl-[260px] lg:pl-[320px]">
           <div className="grid gap-10 sm:grid-cols-3 sm:gap-6 md:gap-10">
             {benefits.map((benefit) => (
               <BenefitItem key={benefit.label} {...benefit} />

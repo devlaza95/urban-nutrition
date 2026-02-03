@@ -64,7 +64,7 @@ export function TestimonialsSection({
 
   return (
     <section id="zadovoljni-klijenti" className="scroll-mt-24 mt-20 pt-20">
-      <div className="mx-auto w-full max-w-[85%] px-6">
+      <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
         <h2
           className={cn(
             anton.className,
@@ -76,7 +76,7 @@ export function TestimonialsSection({
       </div>
 
       <div className="mt-10">
-        <div className="mx-auto w-full max-w-[85%] px-6">
+        <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
           <Carousel setApi={setApi} opts={{ align: "start", loop: true }}>
             <CarouselContent className="-ml-6 pb-6 h-full">
               {testimonials.map((t) => (

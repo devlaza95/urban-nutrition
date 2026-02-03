@@ -32,7 +32,7 @@ export function SiteHeader({ className }: { className?: string }) {
 
   return (
     <header className={cn("sticky top-0 z-50 w-full bg-background", className)}>
-      <div className="mx-auto flex h-24 w-full max-w-[85%] items-center justify-between gap-6 px-6">
+      <div className="mx-auto flex h-24 w-full max-w-[95%] lg:max-w-[85%] items-center justify-between gap-6 px-4">
         <a
           href="#pocetna"
           className="flex items-center gap-3 rounded-md outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
@@ -63,7 +63,7 @@ export function SiteHeader({ className }: { className?: string }) {
         <div className="flex items-center gap-2">
           <Button
             asChild
-            className="hidden h-12 rounded-full px-8 text-base font-semibold md:inline-flex"
+            className="inline-flex h-12 rounded-full px-8 text-base font-semibold"
           >
             <a href="#protein">KUPI PROTEIN</a>
           </Button>

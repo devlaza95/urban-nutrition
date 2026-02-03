@@ -18,7 +18,7 @@ function formatRsd(price: number) {
 export function ProteinSection({ product }: { product: Product | null }) {
   return (
     <section id="protein" className="scroll-mt-24 mt-20 pt-4 bg-[#F2F1FF]">
-      <div className="mx-auto w-full max-w-[85%] px-6">
+      <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
         <h2
           className={cn(
             anton.className,
@@ -39,7 +39,7 @@ export function ProteinSection({ product }: { product: Product | null }) {
       </div>
 
       <div className="mt-8">
-        <div className="mx-auto w-full max-w-[85%] px-6 py-12">
+        <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4 py-12">
           {!product ? (
             <div
               className={cn(

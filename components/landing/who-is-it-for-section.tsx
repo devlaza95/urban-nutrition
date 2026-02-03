@@ -57,7 +57,7 @@ export function WhoIsItForSection({ items }: { items: WhoIsItForItem[] }) {
 
   return (
     <section id="kome-je-namenjen" className="scroll-mt-24 mt-20 pt-20">
-      <div className="mx-auto w-full max-w-[85%] px-6">
+      <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
         <h2
           className={cn(
             anton.className,
@@ -78,7 +78,7 @@ export function WhoIsItForSection({ items }: { items: WhoIsItForItem[] }) {
       </div>
 
       <div className="mt-10">
-        <div className="mx-auto w-full max-w-[85%] px-6">
+        <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
           <Carousel
             setApi={setApi}
             opts={{ align: "start", loop: true, dragFree: true }}

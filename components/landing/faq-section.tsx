@@ -80,7 +80,7 @@ export function FaqSection({ items }: { items: FaqItem[] }) {
         priority={false}
       />
 
-      <div className="mx-auto w-full max-w-[85%] px-6">
+      <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
         <h2
           className={cn(
             anton.className,
