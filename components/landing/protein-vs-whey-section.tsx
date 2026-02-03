@@ -76,7 +76,7 @@ export function ProteinVsWheySection() {
         <h2
           className={cn(
             anton.className,
-            "text-center text-[46px] leading-[83px] tracking-[0px] font-normal text-foreground",
+            "text-center text-[32px] leading-[38px] md:text-[38px] md:leading-[44px] lg:text-[46px] lg:leading-[83.72px] tracking-[0px] font-normal text-foreground",
           )}
         >
           Goat Power Protein vs Whey — u čemu je razlika?
@@ -85,7 +85,7 @@ export function ProteinVsWheySection() {
         <p
           className={cn(
             inter.className,
-            "mt-2 text-center text-[18px] tracking-[0px] font-normal text-foreground",
+            "mt-4 text-center text-[16px] leading-[100%] md:text-[17px] lg:text-[18px] tracking-[0px] font-normal text-foreground",
           )}
         >
           Nije poenta da je jedno “bolje”. Poenta je da izabereš protein koji ti
@@ -98,17 +98,17 @@ export function ProteinVsWheySection() {
             src={powderAndSpoon}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute left-14 -top-24 hidden h-auto w-[360px] lg:block"
+            className="md:z-20 pointer-events-none absolute -left-54 top-32 md:left-14 md:-top-24 h-auto md:w-64 lg:w-[360px]"
           />
           <Image
             src={proteinGym}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute -right-54 -top-10 hidden h-auto w-[360px] lg:block"
+            className="z-0 md:z-20 pointer-events-none absolute -right-32 -top-24 md:-right-54 h-auto md:w-64 lg:w-[360px]"
           />
 
           {/* Desktop/tablet grid */}
-          <div className="hidden lg:grid lg:grid-cols-[240px_1fr_1fr] lg:gap-x-10">
+          <div className="hidden relative lg:grid lg:grid-cols-[240px_1fr_1fr] lg:gap-x-10 z-10">
             <div />
 
             <div
@@ -133,7 +133,7 @@ export function ProteinVsWheySection() {
                 <div
                   className={cn(
                     anton.className,
-                    "flex h-[83px] items-center pr-4 text-[18px] leading-[83px] tracking-[0px] font-normal text-foreground",
+                    "flex h-[83px] w-full text-center items-center pr-4 text-[18px] leading-[83px] tracking-[0px] font-normal text-foreground",
                   )}
                 >
                   {row.label}
@@ -165,7 +165,7 @@ export function ProteinVsWheySection() {
           </div>
 
           {/* Mobile layout */}
-          <div className="space-y-5 lg:hidden">
+          <div className="space-y-5 relative lg:hidden z-10">
             <div className="grid grid-cols-2 gap-4">
               <div
                 className={cn(
@@ -186,11 +186,11 @@ export function ProteinVsWheySection() {
             </div>
 
             {rows.map((row) => (
-              <div key={row.label} className="space-y-2">
+              <div key={row.label} className="space-y-2 w-full">
                 <div
                   className={cn(
                     inter.className,
-                    "text-[14px] font-semibold text-foreground",
+                    "text-[14px] font-bold text-center text-foreground",
                   )}
                 >
                   {row.label}
@@ -218,7 +218,7 @@ export function ProteinVsWheySection() {
           </div>
 
           {/* CTA + disclaimer */}
-          <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-end">
+          <div className="mt-10 grid gap-8 relative lg:grid-cols-2 lg:items-end z-10">
             <div className="space-y-4">
               <div
                 className={cn(
