@@ -8,12 +8,16 @@ let rehydratePromise: Promise<void> | null = null;
 /**
  * Returns a stable promise that resolves when the cart store is rehydrated from localStorage.
  * Resolve once per app load; same promise is returned on every call.
+ * On the server (prerender), returns an already-resolved promise so we never access .persist.
  */
 function getRehydratePromise(): Promise<void> {
+  if (typeof window === "undefined") {
+    return Promise.resolve();
+  }
   if (!rehydratePromise) {
-    rehydratePromise = Promise.resolve(useCartStore.persist.rehydrate()).then(
-      () => {},
-    );
+    rehydratePromise = Promise.resolve(
+      useCartStore.persist?.rehydrate?.() ?? Promise.resolve(),
+    ).then(() => {});
   }
   return rehydratePromise;
 }
