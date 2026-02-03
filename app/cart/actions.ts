@@ -1,13 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import {
-  transporter,
-  MAIL_FROM,
-  MAIL_TO_OFFICE,
-  sanitizeEmailAddress,
-} from "@/lib/email/transporter";
-import { getOrderNotificationEmail } from "@/lib/email/templates/order-notification";
+import { sanitizeEmailAddress } from "@/lib/email/transporter";
+import { sendOrderEmails } from "@/lib/email/order-emails";
 import { DELIVERY_COST_RSD } from "@/lib/cart/types";
 
 const orderItemSchema = z.object({
@@ -69,25 +64,17 @@ export async function submitOrder(
 
   const submittedDate = new Date().toLocaleString("sr-Latn");
 
+  const orderPayload = {
+    ...formData,
+    email: sanitizedEmail,
+    items: orderItems,
+    deliveryCost: DELIVERY_COST_RSD,
+    totalWithDelivery,
+    submittedDate,
+  };
+
   try {
-    const notification = getOrderNotificationEmail({
-      ...formData,
-      email: sanitizedEmail,
-      items: orderItems,
-      deliveryCost: DELIVERY_COST_RSD,
-      totalWithDelivery,
-      submittedDate,
-    });
-
-    await transporter.sendMail({
-      from: MAIL_FROM,
-      to: MAIL_TO_OFFICE,
-      replyTo: sanitizedEmail,
-      subject: notification.subject,
-      html: notification.html,
-      text: notification.text,
-    });
-
+    await sendOrderEmails(orderPayload);
     return { success: true };
   } catch (err) {
     console.error("Order email error:", err);

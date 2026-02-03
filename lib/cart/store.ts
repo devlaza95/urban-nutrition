@@ -17,6 +17,10 @@ type CartStore = CartState & {
   goToPrevStep: () => void;
   canProceedToStep2: () => boolean;
   canProceedToStep3: () => boolean;
+  /** Clears cart after order is complete (call when user leaves confirmation step). */
+  clearCart: () => void;
+  /** Clears cart contents and storage, then shows step 3 (call right after submitOrder success). */
+  completeOrderAndShowConfirmation: () => void;
 };
 
 function parseStoredItems(items: unknown): CartItem[] {
@@ -97,6 +101,24 @@ export const useCartStore = create<CartStore>()(
         set((state) => ({
           step: Math.max(1, state.step - 1) as 1 | 2 | 3,
         })),
+
+      clearCart: () =>
+        set({
+          step: 1,
+          items: [],
+          promoCode: undefined,
+          formData: undefined,
+          orderSubmitted: false,
+        }),
+
+      completeOrderAndShowConfirmation: () =>
+        set({
+          step: 3,
+          orderSubmitted: true,
+          items: [],
+          promoCode: undefined,
+          formData: undefined,
+        }),
     }),
     {
       name: CART_STORAGE_KEY,
@@ -110,7 +132,13 @@ export const useCartStore = create<CartStore>()(
       }),
       merge: (persisted, current) => {
         if (!persisted || typeof persisted !== "object") return current;
-        const p = persisted as Record<string, unknown>;
+        // Zustand persist stores { state, version }; unwrap to get actual state
+        const raw =
+          "state" in persisted && persisted.state != null
+            ? (persisted as { state: Record<string, unknown> }).state
+            : (persisted as Record<string, unknown>);
+        if (!raw || typeof raw !== "object") return current;
+        const p = raw as Record<string, unknown>;
         return {
           ...current,
           step:

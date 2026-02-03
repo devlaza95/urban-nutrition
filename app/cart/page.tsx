@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/lib/cart/store";
+import { CartRehydrated } from "@/hooks/use-cart-rehydrated";
 import { Toaster } from "@/components/ui/sonner";
 import { CheckoutStepIndicator } from "@/components/cart/checkout-step-indicator";
 import { CartStep } from "@/components/cart/cart-step";
@@ -55,18 +56,46 @@ function productMapKey(_id: string): string {
   return _id.startsWith("drafts.") ? _id.slice(7) : _id;
 }
 
-export default function CartPage() {
+function CartPageContent() {
   const { step, items, orderSubmitted } = useCart();
   const productIds = items.map((i) => i.productId);
   const { products, loading } = useCartProducts(productIds);
   const productsMap = new Map(
     products.map((p) => [productMapKey(p._id), p] as const),
   );
-
   const effectiveStep = step === 3 && !orderSubmitted ? 2 : step;
 
   return (
-    <div className="min-h-[100dvh] bg-background text-foreground">
+    <>
+      <CheckoutStepIndicator currentStep={effectiveStep} />
+      <div className="mx-auto max-w-4xl">
+        {effectiveStep === 1 && (
+          <CartStep productsMap={productsMap} productsLoading={loading} />
+        )}
+        {effectiveStep === 2 && <CheckoutFormStep productsMap={productsMap} />}
+        {effectiveStep === 3 && <OrderConfirmationStep />}
+      </div>
+    </>
+  );
+}
+
+function CartLoadingFallback() {
+  return (
+    <div className="min-h-[100dvh-40px] bg-background text-foreground">
+      <main className="relative w-full bg-white">
+        <section className="relative mx-auto w-full max-w-[95%] px-4 py-8 lg:max-w-[85%] lg:py-12">
+          <div className="mx-auto max-w-4xl py-12 text-center text-muted-foreground">
+            Učitavanje korpe...
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+export default function CartPage() {
+  return (
+    <div className="min-h-[100dvh-40px] bg-background text-foreground">
       <main className="relative w-full bg-white">
         <div
           className="pointer-events-none absolute inset-0 select-none overflow-hidden opacity-[0.03]"
@@ -81,20 +110,11 @@ export default function CartPage() {
         </div>
 
         <section className="relative mx-auto w-full max-w-[95%] px-4 py-8 lg:max-w-[85%] lg:py-12">
-          <CheckoutStepIndicator currentStep={effectiveStep} />
-
-          <div className="mx-auto max-w-4xl">
-            {effectiveStep === 1 && (
-              <CartStep productsMap={productsMap} productsLoading={loading} />
-            )}
-            {effectiveStep === 2 && (
-              <CheckoutFormStep
-                productsMap={productsMap}
-                productsLoading={loading}
-              />
-            )}
-            {effectiveStep === 3 && <OrderConfirmationStep />}
-          </div>
+          <Suspense fallback={<CartLoadingFallback />}>
+            <CartRehydrated>
+              <CartPageContent />
+            </CartRehydrated>
+          </Suspense>
         </section>
       </main>
       <Toaster richColors position="top-center" />

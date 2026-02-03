@@ -1,7 +1,12 @@
 import { renderTemplate, htmlToText } from "../template-loader";
 import type { OrderEmailPayload } from "../types";
 
-export function getOrderNotificationEmail(data: OrderEmailPayload) {
+/**
+ * Builds the customer-facing order confirmation email.
+ * Uses OrderEmailPayload; optional fields (orderId, trackingUrl, estimatedDelivery)
+ * are supported for future improvements.
+ */
+export function getOrderConfirmationEmail(data: OrderEmailPayload) {
   const templateData = {
     ...data,
     items: data.items.map((i) => ({
@@ -25,12 +30,12 @@ export function getOrderNotificationEmail(data: OrderEmailPayload) {
       maximumFractionDigits: 0,
     }),
   };
-  const html = renderTemplate("order-notification", templateData);
 
+  const html = renderTemplate("order-confirmation", templateData);
   const text = htmlToText(html);
 
   return {
-    subject: `Nova narudžbina - ${data.ime} ${data.prezime} - Urban Nutrition`,
+    subject: `Potvrda narudžbine – Urban Nutrition`,
     html,
     text,
   };

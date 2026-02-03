@@ -20,9 +20,12 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import {
-  NativeSelect,
-  NativeSelectOption,
-} from "@/components/ui/native-select";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { anton, inter } from "@/lib/fonts";
 import { urlFor } from "@/lib/sanity/image";
 import type { Product } from "@/lib/sanity/types";
@@ -30,6 +33,7 @@ import { submitOrder } from "@/app/cart/actions";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Separator } from "../ui/separator";
 
 function formatRsd(price: number) {
   return `${price.toLocaleString("en-US", { useGrouping: false, maximumFractionDigits: 0 })} RSD`;
@@ -63,19 +67,14 @@ type FormValues = z.infer<typeof checkoutSchema>;
 
 type CheckoutFormStepProps = {
   productsMap: Map<string, Product>;
-  productsLoading?: boolean;
 };
 
-export function CheckoutFormStep({
-  productsMap,
-  productsLoading,
-}: CheckoutFormStepProps) {
+export function CheckoutFormStep({ productsMap }: CheckoutFormStepProps) {
   const {
     items,
     formData,
     setFormData,
-    setStep,
-    setOrderSubmitted,
+    completeOrderAndShowConfirmation,
     updateItemQuantity,
     goToPrevStep,
   } = useCart();
@@ -139,8 +138,7 @@ export function CheckoutFormStep({
       });
 
       if (result.success) {
-        setOrderSubmitted(true);
-        setStep(3);
+        completeOrderAndShowConfirmation();
       } else {
         toast.error(result.error);
       }
@@ -163,8 +161,8 @@ export function CheckoutFormStep({
   }
 
   return (
-    <div className="space-y-8">
-      <div className="overflow-hidden rounded-2xl border border-border bg-card">
+    <div className="space-y-0">
+      <div className="overflow-hidden border border-border bg-card">
         <div className="bg-[#65609d] px-4 py-3 text-white">
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-5">
@@ -287,33 +285,37 @@ export function CheckoutFormStep({
           })}
         </div>
       </div>
-
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="rounded-2xl border border-border bg-secondary/30 p-6">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 bg-[#E9E9E9] px-5 py-6"
+        >
+          {/* Two-column layout: section title left, content right (per PDF design) */}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,max-content)_1fr] md:gap-8 md:items-start">
             <h3
               className={cn(
                 anton.className,
-                "mb-4 text-lg font-normal text-foreground",
+                "text-lg font-semibold uppercase text-foreground pt-1",
               )}
             >
               PRIMALAC RAČUNA
             </h3>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="border border-border w-full bg-[#DCD8FE] p-5 space-y-4">
               <FormField
                 control={form.control}
                 name="ime"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="grid grid-cols-1 md:grid-cols-6 md:justify-between gap-4 md:gap-0">
                     <FormLabel className={cn(inter.className)}>Ime:</FormLabel>
-                    <FormControl>
+                    <FormControl className="col-span-5">
                       <Input
                         {...field}
+                        placeholder="Ime *"
                         disabled={isPending}
-                        className="bg-background"
+                        className="bg-background border-none"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-6" />
                   </FormItem>
                 )}
               />
@@ -321,59 +323,59 @@ export function CheckoutFormStep({
                 control={form.control}
                 name="prezime"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="grid grid-cols-1 md:grid-cols-6 md:justify-between gap-4 md:gap-0">
                     <FormLabel className={cn(inter.className)}>
                       Prezime:
                     </FormLabel>
-                    <FormControl>
+                    <FormControl className="col-span-5">
                       <Input
                         {...field}
+                        placeholder="Prezime *"
                         disabled={isPending}
-                        className="bg-background"
+                        className="bg-background border-none"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-6" />
                   </FormItem>
                 )}
               />
-            </div>
-            <FormField
-              control={form.control}
-              name="ulicaIBroj"
-              render={({ field }) => (
-                <FormItem className="mt-4">
-                  <FormLabel className={cn(inter.className)}>
-                    Ulica i broj:
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      className="bg-background"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="ulicaIBroj"
+                render={({ field }) => (
+                  <FormItem className="grid grid-cols-1 md:grid-cols-6 md:justify-between gap-4 md:gap-0">
+                    <FormLabel className={cn(inter.className)}>
+                      Ulica i broj:
+                    </FormLabel>
+                    <FormControl className="col-span-5">
+                      <Input
+                        {...field}
+                        placeholder="Ulica i broj *"
+                        disabled={isPending}
+                        className="bg-background border-none"
+                      />
+                    </FormControl>
+                    <FormMessage className="col-span-6" />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="postanskiBroj"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full grid grid-cols-1 md:grid-cols-6 md:justify-between gap-4 md:gap-0">
                     <FormLabel className={cn(inter.className)}>
                       Poštanski broj:
                     </FormLabel>
-                    <FormControl>
+                    <FormControl className="col-span-5">
                       <Input
                         {...field}
-                        placeholder="Poštanski broj i mesto"
+                        placeholder="Poštanski broj *"
                         disabled={isPending}
-                        className="bg-background"
+                        className="bg-background border-none"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-6" />
                   </FormItem>
                 )}
               />
@@ -381,60 +383,64 @@ export function CheckoutFormStep({
                 control={form.control}
                 name="grad"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="grid grid-cols-1 md:grid-cols-6 md:justify-between gap-4 md:gap-0">
                     <FormLabel className={cn(inter.className)}>Grad:</FormLabel>
-                    <FormControl>
+                    <FormControl className="col-span-5">
                       <Input
                         {...field}
+                        placeholder="Grad *"
                         disabled={isPending}
-                        className="bg-background"
+                        className="bg-background border-none"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-6" />
                   </FormItem>
                 )}
               />
-            </div>
-            <FormField
-              control={form.control}
-              name="drzava"
-              render={({ field }) => (
-                <FormItem className="mt-4">
-                  <FormLabel className={cn(inter.className)}>Država:</FormLabel>
-                  <FormControl>
-                    <NativeSelect
-                      {...field}
-                      onChange={(e) => field.onChange(e.target.value)}
-                      disabled={isPending}
-                      className="w-full bg-background"
-                    >
-                      <NativeSelectOption value="Srbija">
-                        Srbija
-                      </NativeSelectOption>
-                    </NativeSelect>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="drzava"
+                render={({ field }) => (
+                  <FormItem className="grid grid-cols-1 md:grid-cols-6 md:justify-between gap-4 md:gap-0">
+                    <FormLabel className={cn(inter.className)}>
+                      Država:
+                    </FormLabel>
+                    <FormControl className="col-span-5 w-full">
+                      <Select
+                        value={field.value ?? "Srbija"}
+                        onValueChange={field.onChange}
+                        disabled={isPending}
+                      >
+                        <SelectTrigger className="w-full col-span-5 bg-background border-none">
+                          <SelectValue placeholder="Država *" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Srbija">Srbija</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage className="col-span-6" />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="grid grid-cols-1 md:grid-cols-6 md:justify-between gap-4 md:gap-0">
                     <FormLabel className={cn(inter.className)}>
                       E-mail:
                     </FormLabel>
-                    <FormControl>
+                    <FormControl className="col-span-5">
                       <Input
                         type="email"
                         {...field}
+                        placeholder="E-mail *"
                         disabled={isPending}
-                        className="bg-background"
+                        className="bg-background border-none"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-6" />
                   </FormItem>
                 )}
               />
@@ -442,126 +448,136 @@ export function CheckoutFormStep({
                 control={form.control}
                 name="telefon"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="grid grid-cols-1 md:grid-cols-6 md:justify-between gap-4 md:gap-0">
                     <FormLabel className={cn(inter.className)}>
                       Telefon:
                     </FormLabel>
-                    <FormControl>
+                    <FormControl className="col-span-5">
                       <Input
                         {...field}
+                        placeholder="Telefon *"
                         disabled={isPending}
-                        className="bg-background"
+                        className="bg-background border-none"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-6" />
                   </FormItem>
                 )}
               />
             </div>
           </div>
-
-          <div className="rounded-2xl border border-border bg-secondary/30 p-6">
+          <Separator className="my-4 bg-foreground" />
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,max-content)_1fr] md:gap-8 md:items-center">
             <h3
               className={cn(
                 anton.className,
-                "mb-2 text-lg font-normal text-foreground",
+                "text-lg font-semibold uppercase text-foreground pt-1",
               )}
             >
               NAČIN ISPORUKE
             </h3>
-            <p className={cn(inter.className, "text-foreground")}>
-              Kurirska služba BEX
-            </p>
+            <div className="rounded-2xl border border-border w-full">
+              <p className={cn(inter.className, "text-foreground")}>
+                Kurirska služba BEX
+              </p>
+            </div>
           </div>
+          <Separator className="my-4 bg-foreground" />
 
-          <div className="rounded-2xl border border-border bg-secondary/30 p-6">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,max-content)_1fr] md:gap-8 md:items-start">
             <h3
               className={cn(
                 anton.className,
-                "mb-4 text-lg font-normal text-foreground",
+                "text-lg font-semibold uppercase text-foreground pt-1",
               )}
             >
               ZA PLAĆANJE
             </h3>
-            <FormField
-              control={form.control}
-              name="paymentMethod"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <RadioGroup
-                      value={field.value}
-                      onValueChange={field.onChange}
-                      className="flex flex-col gap-3"
-                    >
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem
-                          value="Po preuzimanju"
-                          id="payment-cod"
-                        />
-                        <Label
-                          htmlFor="payment-cod"
-                          className={cn(
-                            inter.className,
-                            "cursor-pointer font-normal",
-                          )}
-                        >
-                          Po preuzimanju
-                        </Label>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem
-                          value="Platna kartica"
-                          id="payment-card"
-                          disabled
-                        />
-                        <Label
-                          htmlFor="payment-card"
-                          className={cn(
-                            inter.className,
-                            "cursor-not-allowed font-normal text-muted-foreground",
-                          )}
-                        >
-                          Platna kartica (uskoro)
-                        </Label>
-                      </div>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="rounded-2xl border border-border w-full">
+              <FormField
+                control={form.control}
+                name="paymentMethod"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <RadioGroup
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        className="flex flex-col gap-3 [&_[data-slot=radio-group-indicator]_svg]:fill-green-600"
+                      >
+                        <div className="flex items-center gap-2">
+                          <RadioGroupItem
+                            value="Po preuzimanju"
+                            id="payment-cod"
+                          />
+                          <Label
+                            htmlFor="payment-cod"
+                            className={cn(
+                              inter.className,
+                              "cursor-pointer font-normal",
+                            )}
+                          >
+                            Po preuzimanju
+                          </Label>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <RadioGroupItem
+                            value="Platna kartica"
+                            id="payment-card"
+                            disabled
+                          />
+                          <Label
+                            htmlFor="payment-card"
+                            className={cn(
+                              inter.className,
+                              "cursor-not-allowed font-normal text-foreground",
+                            )}
+                          >
+                            Platna kartica
+                          </Label>
+                        </div>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage className="col-span-6" />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
+          <Separator className="my-4 bg-foreground" />
 
-          <div className="rounded-2xl border border-border bg-secondary/30 p-6">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,max-content)_1fr] md:gap-8 md:items-start">
             <h3
               className={cn(
                 anton.className,
-                "mb-4 text-lg font-normal text-foreground",
+                "text-lg font-semibold uppercase text-foreground pt-1",
               )}
             >
               NAPOMENA UZ NARUDŽBINU
             </h3>
-            <FormField
-              control={form.control}
-              name="napomena"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      placeholder="Dodatne napomene..."
-                      className="min-h-24 bg-background"
-                      disabled={isPending}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="rounded-2xl border border-border w-full">
+              <FormField
+                control={form.control}
+                name="napomena"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        placeholder="Dodatne napomene..."
+                        className="min-h-24 w-full bg-background"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage className="col-span-6" />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
+          <Separator className="my-4 bg-foreground" />
 
-          <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
             <Button
               type="button"
               variant="outline"
