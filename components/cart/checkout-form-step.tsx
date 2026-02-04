@@ -291,6 +291,9 @@ export function CheckoutFormStep({ productsMap }: CheckoutFormStepProps) {
           className="space-y-8 bg-[#E9E9E9] px-5 py-6"
         >
           {/* Two-column layout: section title left, content right (per PDF design) */}
+          <p className="leading-7 text-primary">
+            Za 3+ poručenih proizvoda poštarina je besplatna!
+          </p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-[minmax(0,max-content)_1fr] md:gap-8 md:items-start">
             <h3
               className={cn(

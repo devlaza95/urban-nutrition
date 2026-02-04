@@ -1,6 +1,6 @@
 "use client";
 
-import { use, type ReactNode } from "react";
+import { use, useEffect, useState, type ReactNode } from "react";
 import { useCartStore } from "@/lib/cart/store";
 
 let rehydratePromise: Promise<void> | null = null;
@@ -29,4 +29,29 @@ function getRehydratePromise(): Promise<void> {
 export function CartRehydrated({ children }: { children: ReactNode }) {
   use(getRehydratePromise());
   return <>{children}</>;
+}
+
+/**
+ * Non-Suspense hook that returns true once the cart store has been rehydrated
+ * from localStorage on the client. Useful for components like the header that
+ * need to avoid reading stale (empty) cart state on first paint.
+ */
+export function useCartHydration(): boolean {
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+
+    getRehydratePromise().then(() => {
+      if (mounted) {
+        setHydrated(true);
+      }
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return hydrated;
 }

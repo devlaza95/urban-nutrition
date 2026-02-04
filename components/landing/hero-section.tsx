@@ -13,10 +13,7 @@ export function HeroSection({
   landingPage: LandingPage | null;
 }) {
   return (
-    <section
-      id="pocetna"
-      className="relative isolate w-full overflow-hidden scroll-mt-32"
-    >
+    <section id="pocetna" className="relative isolate w-full scroll-mt-32">
       <div aria-hidden className="absolute inset-0 z-0">
         <Image
           src="/hero-background.png"
@@ -67,37 +64,40 @@ export function HeroSection({
             >
               <a href="#protein">KUPI PROTEIN</a>
             </Button>
-
-            {landingPage?.allergiesInfo ? (
-              <PortableTextRenderer
-                value={landingPage.allergiesInfo}
-                className="max-w-xl text-md italic leading-[100%] align-middle [&_p]:!text-foreground [&_p]:italic"
-              />
-            ) : null}
           </div>
 
           <div className={cn("relative z-10 space-y-4", inter.className)}>
-            <div className="relative overflow-hidden rounded-3xl">
-              <div className="relative aspect-[3/2] overflow-hidden rounded-3xl">
-                {landingPage?.hero?.heroImage ? (
-                  <Image
-                    src={urlFor(landingPage.hero.heroImage)
-                      .width(1800)
-                      .height(1200)
-                      .fit("max")
-                      .url()}
-                    alt="Hero"
-                    fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-contain object-center"
-                    priority
-                  />
-                ) : (
-                  <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-                    Add a hero image in the CMS
-                  </div>
-                )}
+            <div className="relative">
+              <div className="relative overflow-hidden rounded-3xl">
+                <div className="relative aspect-[3/2] overflow-hidden rounded-3xl">
+                  {landingPage?.hero?.heroImage ? (
+                    <Image
+                      src={urlFor(landingPage.hero.heroImage)
+                        .width(1800)
+                        .height(1200)
+                        .fit("max")
+                        .url()}
+                      alt="Hero"
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-contain object-center"
+                      priority
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+                      Add a hero image in the CMS
+                    </div>
+                  )}
+                </div>
               </div>
+              <Image
+                src="/Slika hero 2.png"
+                alt="Hero"
+                width={150}
+                height={150}
+                className="absolute -bottom-12 -right-12 object-contain object-center"
+                priority
+              />
             </div>
 
             <div className="lg:hidden">

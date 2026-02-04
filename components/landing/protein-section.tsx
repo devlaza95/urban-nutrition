@@ -107,6 +107,19 @@ export function ProteinSection({ product }: { product: Product | null }) {
 
                 <Separator className="my-4 bg-foreground" />
 
+                {product.allergiesInfo ? (
+                  <div>
+                    <PortableTextRenderer
+                      value={product.allergiesInfo}
+                      className={cn(
+                        inter.className,
+                        "text-[16px] font-normal text-foreground",
+                        "[&_p]:!text-foreground [&_p]:!text-[16px] [&_p]:!leading-[1.4]",
+                      )}
+                    />
+                  </div>
+                ) : null}
+
                 <Tabs defaultValue="opis" className="w-full">
                   <TabsList variant="line" className="h-auto p-0 gap-6">
                     <TabsTrigger
@@ -142,9 +155,7 @@ export function ProteinSection({ product }: { product: Product | null }) {
 
                   <TabsContent value="info" className="pt-4">
                     <PortableTextRenderer
-                      value={
-                        product.productInformation ?? product.allergiesInfo
-                      }
+                      value={product.productInformation ?? []}
                       className={cn(
                         inter.className,
                         "text-[18px] font-normal text-foreground",

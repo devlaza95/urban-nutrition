@@ -204,7 +204,9 @@ export function CartStep({ productsMap, productsLoading }: CartStepProps) {
           )}
         </div>
       </div>
-
+      <p className="leading-7 text-primary">
+        Za 3+ poručenih proizvoda poštarina je besplatna!
+      </p>
       <div className="flex flex-wrap items-center gap-4 rounded-xl border border-border bg-secondary/30 px-4 py-3">
         <label
           htmlFor="promo-code"

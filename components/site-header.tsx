@@ -8,6 +8,7 @@ import { MenuIcon, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/lib/cart/store";
+import { useCartHydration } from "@/hooks/use-cart-rehydrated";
 import {
   Sheet,
   SheetClose,
@@ -41,8 +42,11 @@ const mobileLinkClass =
 
 export function SiteHeader({ className }: { className?: string }) {
   const [open, setOpen] = React.useState(false);
+  const hydrated = useCartHydration();
   const items = useCartStore((s) => s.items);
-  const cartCount = items.reduce((sum, i) => sum + i.quantity, 0);
+  const cartCount = hydrated
+    ? items.reduce((sum, i) => sum + i.quantity, 0)
+    : 0;
 
   return (
     <header className={cn("sticky top-0 z-50 w-full bg-background", className)}>
