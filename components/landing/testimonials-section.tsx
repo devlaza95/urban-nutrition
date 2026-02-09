@@ -98,7 +98,7 @@ export function TestimonialsSection({
                                 alt={t.name || "Customer"}
                                 fill
                                 sizes="112px"
-                                className="object-cover"
+                                className="object-cover object-top"
                               />
                             ) : null}
                           </div>

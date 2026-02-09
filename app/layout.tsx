@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Urban Nutrition",
 };
 
+export const revalidate = 0; // Disable caching to see CMS changes immediately
+
 async function getLandingPageForFooter() {
   try {
     return await sanityClient.fetch<LandingPage | null>(landingPageQuery);

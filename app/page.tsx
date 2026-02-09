@@ -22,6 +22,8 @@ import type {
   WhoIsItForItem,
 } from "@/lib/sanity/types";
 
+export const revalidate = 0; // Disable caching to see CMS changes immediately
+
 async function getPageData() {
   try {
     const [landingPage, testimonials, products, whoIsItForItems, faqItems] =
