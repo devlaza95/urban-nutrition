@@ -21,6 +21,11 @@ import type {
   Testimonial,
   WhoIsItForItem,
 } from "@/lib/sanity/types";
+import {
+  getFaqJsonLd,
+  getOrganizationJsonLd,
+  getProductJsonLd,
+} from "@/lib/seo/schema";
 
 export const revalidate = 0; // Disable caching to see CMS changes immediately
 
@@ -52,6 +57,10 @@ export default async function Home() {
     await getPageData();
   const product = products?.[0] ?? null;
 
+  const organizationJsonLd = getOrganizationJsonLd(landingPage);
+  const productJsonLd = getProductJsonLd(product, testimonials);
+  const faqJsonLd = getFaqJsonLd(faqItems);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <ScrollToHash />
@@ -64,6 +73,15 @@ export default async function Home() {
         <WhoIsItForSection items={whoIsItForItems} />
         <FaqSection items={faqItems} />
       </main>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            [organizationJsonLd, productJsonLd, faqJsonLd].filter(Boolean),
+          ),
+        }}
+      />
     </div>
   );
 }

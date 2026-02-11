@@ -108,6 +108,43 @@ export default defineType({
       of: portableTextOf,
     }),
     defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'seoTitle',
+          title: 'SEO Title',
+          type: 'string',
+          description:
+            'Custom title for search engines and social previews. Leave empty to use the default.',
+        }),
+        defineField({
+          name: 'seoDescription',
+          title: 'SEO Description',
+          type: 'text',
+          rows: 3,
+          description: 'Custom meta description. Leave empty to use the default.',
+        }),
+        defineField({
+          name: 'ogImage',
+          title: 'Open Graph Image',
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt text',
+              type: 'string',
+              description: 'Short description of the image, used for accessibility and SEO.',
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: 'footer',
       title: 'Footer',
       type: 'object',

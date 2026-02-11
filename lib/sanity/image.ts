@@ -24,3 +24,17 @@ export function urlFor(source: SanityImageSource | null | undefined) {
   }
   return builder.image(source);
 }
+
+export function getImageUrl(
+  source: SanityImageSource | null | undefined,
+): string | null {
+  if (!source) {
+    return null;
+  }
+
+  try {
+    return urlFor(source).url();
+  } catch {
+    return null;
+  }
+}

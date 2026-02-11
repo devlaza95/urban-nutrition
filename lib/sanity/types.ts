@@ -10,6 +10,11 @@ export type LandingPage = {
   allergiesInfo?: unknown;
   deliveryInfo?: unknown;
   returnsInfo?: unknown;
+  seo?: {
+    ogImage?: SanityImageSource;
+    seoTitle?: string;
+    seoDescription?: string;
+  };
   footer?: {
     socialLinks?: Array<{
       platform?:

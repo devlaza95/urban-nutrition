@@ -77,7 +77,10 @@ export function HeroSection({
                         .height(1200)
                         .fit("max")
                         .url()}
-                      alt="Hero"
+                      alt={
+                        (landingPage.hero.heroImage as { alt?: string })?.alt ||
+                        "Prirodni proteinski napitak Urban Nutrition"
+                      }
                       fill
                       sizes="(min-width: 1024px) 50vw, 100vw"
                       className="object-contain object-center"
