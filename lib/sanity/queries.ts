@@ -26,6 +26,7 @@ export const testimonialsQuery = `*[_type == "testimonial"] | order(_createdAt d
   _id,
   name,
   age,
+  occupation,
   rating,
   description,
   image

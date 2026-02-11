@@ -115,12 +115,13 @@ export function TestimonialsSection({
                             <div
                               className={cn(
                                 inter.className,
-                                "mt-2 text-[14px] leading-[14px] font-normal text-muted-foreground",
+                                "mt-2 space-y-1 text-[14px] leading-[14px] font-normal text-muted-foreground",
                               )}
                             >
-                              {typeof t.age === "number"
-                                ? `${t.age} godina`
-                                : null}
+                              {typeof t.age === "number" ? (
+                                <div>{t.age} godina</div>
+                              ) : null}
+                              {t.occupation ? <div>{t.occupation}</div> : null}
                             </div>
                           </div>
                         </div>

@@ -74,7 +74,13 @@ export default defineType({
       name: 'age',
       title: 'Age',
       type: 'number',
+      // Optional field; if provided, must be non-negative
       validation: (Rule) => Rule.min(0),
+    }),
+    defineField({
+      name: 'occupation',
+      title: 'Occupation',
+      type: 'string',
     }),
     defineField({
       name: 'rating',

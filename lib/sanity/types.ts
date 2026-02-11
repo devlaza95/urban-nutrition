@@ -33,6 +33,7 @@ export type Testimonial = {
   _id: string;
   name?: string;
   age?: number;
+  occupation?: string;
   rating?: number;
   description?: unknown;
   image?: SanityImageSource;
