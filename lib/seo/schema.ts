@@ -6,7 +6,7 @@ import type {
 } from "@/lib/sanity/types";
 import { getImageUrl } from "@/lib/sanity/image";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://urbannutrition.rs";
 
 export function getOrganizationJsonLd(landingPage: LandingPage | null) {
   const contact = landingPage?.footer?.contact;

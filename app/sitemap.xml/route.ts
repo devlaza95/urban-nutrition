@@ -1,4 +1,4 @@
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://urbannutrition.rs";
 
 export async function GET() {
   const urls = ["/", "/cart", "/contact"];

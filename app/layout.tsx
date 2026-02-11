@@ -8,7 +8,7 @@ import { landingPageQuery } from "@/lib/sanity/queries";
 import type { LandingPage } from "@/lib/sanity/types";
 import { getImageUrl } from "@/lib/sanity/image";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://urbannutrition.rs";
 
 export async function generateMetadata(): Promise<Metadata> {
   let landingPage: LandingPage | null = null;
