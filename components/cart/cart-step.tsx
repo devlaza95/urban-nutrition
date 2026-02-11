@@ -75,7 +75,7 @@ export function CartStep({ productsMap, productsLoading }: CartStepProps) {
     <div className="space-y-6">
       <div className="overflow-hidden rounded-2xl border border-border bg-card">
         <div className="bg-[#65609d] px-4 py-3 text-white">
-          <div className="grid grid-cols-12 gap-4">
+          <div className="hidden grid-cols-12 gap-4 md:grid">
             <div className="col-span-5">
               <span className={cn(anton.className, "text-sm font-normal")}>
                 Naziv proizvoda
@@ -115,9 +115,9 @@ export function CartStep({ productsMap, productsLoading }: CartStepProps) {
               return (
                 <div
                   key={item.productId}
-                  className="grid grid-cols-12 gap-4 items-center px-4 py-4"
+                  className="grid grid-cols-1 items-start gap-4 px-4 py-4 md:grid-cols-12 md:items-center"
                 >
-                  <div className="col-span-5 flex items-center gap-4">
+                  <div className="flex items-center gap-4 md:col-span-5">
                     {image ? (
                       <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-muted">
                         <Image
@@ -148,7 +148,7 @@ export function CartStep({ productsMap, productsLoading }: CartStepProps) {
                       </p>
                     </div>
                   </div>
-                  <div className="col-span-2 flex items-center justify-center gap-1">
+                  <div className="flex items-center justify-start gap-2 md:col-span-2 md:justify-center">
                     <Button
                       type="button"
                       variant="outline"
@@ -183,12 +183,12 @@ export function CartStep({ productsMap, productsLoading }: CartStepProps) {
                       +
                     </Button>
                   </div>
-                  <div className="col-span-2 text-center">
+                  <div className="text-left md:col-span-2 md:text-center">
                     <span className={cn(inter.className, "text-foreground")}>
                       {formatRsd(price)}
                     </span>
                   </div>
-                  <div className="col-span-3 text-right">
+                  <div className="text-right md:col-span-3">
                     <span
                       className={cn(
                         inter.className,

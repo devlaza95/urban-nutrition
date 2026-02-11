@@ -164,7 +164,7 @@ export function CheckoutFormStep({ productsMap }: CheckoutFormStepProps) {
     <div className="space-y-0">
       <div className="overflow-hidden border border-border bg-card">
         <div className="bg-[#65609d] px-4 py-3 text-white">
-          <div className="grid grid-cols-12 gap-4">
+          <div className="hidden grid-cols-12 gap-4 md:grid">
             <div className="col-span-5">
               <span className={cn(anton.className, "text-sm font-normal")}>
                 Naziv proizvoda
@@ -197,9 +197,9 @@ export function CheckoutFormStep({ productsMap }: CheckoutFormStepProps) {
             return (
               <div
                 key={item.productId}
-                className="grid grid-cols-12 gap-4 items-center px-4 py-4"
+                className="grid grid-cols-1 items-start gap-4 px-4 py-4 md:grid-cols-12 md:items-center"
               >
-                <div className="col-span-5 flex items-center gap-4">
+                <div className="flex items-center gap-4 md:col-span-5">
                   {image ? (
                     <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-muted">
                       <Image
@@ -230,7 +230,7 @@ export function CheckoutFormStep({ productsMap }: CheckoutFormStepProps) {
                     </p>
                   </div>
                 </div>
-                <div className="col-span-2 flex items-center justify-center gap-1">
+                <div className="flex items-center justify-start gap-2 md:col-span-2 md:justify-center">
                   <Button
                     type="button"
                     variant="outline"
@@ -265,12 +265,12 @@ export function CheckoutFormStep({ productsMap }: CheckoutFormStepProps) {
                     +
                   </Button>
                 </div>
-                <div className="col-span-2 text-center">
+                <div className="text-left md:col-span-2 md:text-center">
                   <span className={cn(inter.className, "text-foreground")}>
                     {formatRsd(price)}
                   </span>
                 </div>
-                <div className="col-span-3 text-right">
+                <div className="text-right md:col-span-3">
                   <span
                     className={cn(
                       inter.className,
@@ -481,7 +481,7 @@ export function CheckoutFormStep({ productsMap }: CheckoutFormStepProps) {
             </h3>
             <div className="rounded-2xl border border-border w-full">
               <p className={cn(inter.className, "text-foreground")}>
-                Kurirska služba BEX
+                Kurirskom službom
               </p>
             </div>
           </div>
@@ -521,22 +521,6 @@ export function CheckoutFormStep({ productsMap }: CheckoutFormStepProps) {
                             )}
                           >
                             Po preuzimanju
-                          </Label>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <RadioGroupItem
-                            value="Platna kartica"
-                            id="payment-card"
-                            disabled
-                          />
-                          <Label
-                            htmlFor="payment-card"
-                            className={cn(
-                              inter.className,
-                              "cursor-not-allowed font-normal text-foreground",
-                            )}
-                          >
-                            Platna kartica
                           </Label>
                         </div>
                       </RadioGroup>

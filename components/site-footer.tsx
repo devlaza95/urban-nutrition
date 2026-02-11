@@ -56,7 +56,7 @@ export function SiteFooter({
 
   return (
     <footer id="kontakt" className="relative mt-24 bg-brand text-white">
-      <div className="pointer-events-none absolute -top-36 right-0 z-10 w-[320px] sm:-top-48 sm:w-[420px] lg:-top-72 lg:w-[520px]">
+      <div className="pointer-events-none absolute -top-36 right-0 z-0 w-[300px] sm:-top-48 sm:w-[420px] lg:-top-72 lg:w-[520px]">
         <Image
           src="/goat-milk-bottle-goat-white-background%201.png"
           alt=""
@@ -67,7 +67,7 @@ export function SiteFooter({
           priority={false}
         />
       </div>
-      <div className="absolute right-4 top-24 z-10 flex flex-wrap items-center gap-6 sm:right-6 sm:top-28 lg:right-[7.5%] lg:top-16">
+      <div className="z-10 flex flex-wrap items-center justify-end gap-6 px-4 pt-8 md:absolute md:right-4 md:top-24 md:px-0 md:pt-0 lg:right-[7.5%] lg:top-16">
         <Image
           src="/Slika%20hero%202.png"
           alt="Certification badge"

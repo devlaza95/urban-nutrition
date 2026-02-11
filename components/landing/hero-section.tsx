@@ -98,7 +98,7 @@ export function HeroSection({
                 alt="Hero"
                 width={150}
                 height={150}
-                className="absolute -bottom-12 -right-12 object-contain object-center"
+                className="hidden object-contain object-center md:absolute md:-bottom-12 md:-right-12 md:block"
                 priority
               />
             </div>
