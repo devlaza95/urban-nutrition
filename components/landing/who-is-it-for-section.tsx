@@ -56,7 +56,7 @@ export function WhoIsItForSection({ items }: { items: WhoIsItForItem[] }) {
   if (!items || items.length === 0) return null;
 
   return (
-    <section id="kome-je-namenjen" className="scroll-mt-24 mt-20 pt-20">
+    <section id="kome-je-namenjen" className="scroll-mt-24">
       <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
         <h2
           className={cn(

@@ -63,16 +63,27 @@ export function TestimonialsSection({
   if (!testimonials || testimonials.length === 0) return null;
 
   return (
-    <section id="zadovoljni-klijenti" className="scroll-mt-24 mt-20 pt-20">
+    <section
+      id="zadovoljni-klijenti"
+      className="scroll-mt-24 mt-4 md:mt-20 pt-20"
+    >
       <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4">
         <h2
           className={cn(
             anton.className,
-            "text-center text-[46px] leading-[83px] tracking-[0px] font-normal text-foreground",
+            "text-center text-[46px] leading-[83px] tracking-[0px] font-normal text-foreground z-10 relative",
           )}
         >
           Zadovoljni klijenti
         </h2>
+        <h3
+          className={cn(
+            inter.className,
+            "text-center text-[18px] leading-[1.5] tracking-[0px] font-normal text-foreground max-w-2xl mx-auto mt-2 md:mt-6",
+          )}
+        >
+          Zadovoljni korisnici koji su izabrali kvalitet i pouzdanu uslugu.
+        </h3>
       </div>
 
       <div className="mt-10">

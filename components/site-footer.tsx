@@ -84,7 +84,7 @@ export function SiteFooter({
         />
       </div>
 
-      <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4 pb-20 pt-14 lg:pt-24">
+      <div className="mx-auto w-full max-w-[95%] lg:max-w-[85%] px-4 pb-20">
         <div className="grid gap-12 lg:grid-cols-4 lg:items-start">
           <div className="space-y-6">
             <Image

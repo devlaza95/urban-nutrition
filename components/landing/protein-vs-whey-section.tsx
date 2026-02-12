@@ -59,7 +59,7 @@ function rowShapeClasses(idx: number, total: number) {
 
 export function ProteinVsWheySection() {
   return (
-    <section className="relative mt-20 overflow-hidden bg-background py-32">
+    <section className="relative overflow-hidden bg-background py-32">
       {/* background */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <Image

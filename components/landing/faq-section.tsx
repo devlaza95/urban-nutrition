@@ -35,12 +35,12 @@ function FaqAccordionColumn({
           <AccordionItem
             key={item._id}
             value={value}
-            className="border-0 rounded-2xl bg-brand px-3 md:px-6"
+            className="border-0 rounded-md bg-brand px-3 md:px-6"
           >
             <AccordionTrigger
               className={cn(
                 inter.className,
-                "items-center rounded-2xl px-2 py-3 md:py-6 text-[18px] font-medium text-white no-underline hover:no-underline",
+                "items-center rounded-md px-2 py-3 md:py-6 text-sm md:text-lg font-medium text-white no-underline hover:no-underline",
                 "[&>svg]:size-9 [&>svg]:rounded-full [&>svg]:bg-white [&>svg]:text-brand [&>svg]:p-2 [&>svg]:translate-y-0",
               )}
             >

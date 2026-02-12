@@ -20,7 +20,7 @@ export function HeroSection({
           alt=""
           fill
           sizes="100vw"
-          className="object-fill opacity-10"
+          className="object-contain object-top md:object-cover opacity-10"
           priority
         />
         <div className="absolute inset-0 bg-background/60" />
@@ -47,14 +47,14 @@ export function HeroSection({
               value={landingPage?.hero?.subheading}
               className={cn(
                 inter.className,
-                "max-w-xl space-y-3 text-[16px] leading-[16.76px] text-center lg:text-[18px] lg:leading-7 [&_p]:!text-foreground",
+                "max-w-xl space-y-3 text-[16px] leading-[16px] text-center lg:text-[18px] lg:leading-[28px] [&_p]:!text-foreground",
               )}
             />
 
             {landingPage?.nutritionInfo ? (
               <PortableTextRenderer
                 value={landingPage.nutritionInfo}
-                className="max-w-xs text-[16px] leading-[16.76px] text-center [&_p]:!text-foreground [&_p]:text-center"
+                className="max-w-xs text-[16px] leading-[16px] text-center lg:leading-[28px] [&_p]:!text-foreground [&_p]:text-center"
               />
             ) : null}
 
@@ -66,7 +66,9 @@ export function HeroSection({
             </Button>
           </div>
 
-          <div className={cn("relative z-10 space-y-4", inter.className)}>
+          <div
+            className={cn("relative z-10 flex flex-col gap-4", inter.className)}
+          >
             <div className="relative">
               <div className="relative overflow-hidden rounded-3xl">
                 <div className="relative aspect-[3/2] overflow-hidden rounded-3xl">
@@ -83,7 +85,7 @@ export function HeroSection({
                       }
                       fill
                       sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="object-contain object-center"
+                      className="object-cover object-center"
                       priority
                     />
                   ) : (
@@ -98,12 +100,12 @@ export function HeroSection({
                 alt="Hero"
                 width={150}
                 height={150}
-                className="hidden object-contain object-center md:absolute md:-bottom-12 md:-right-12 md:block"
+                className="absolute -bottom-8 -right-2 size-20 object-contain object-center md:-bottom-14 md:-right-14 md:size-auto"
                 priority
               />
             </div>
 
-            <div className="lg:hidden">
+            <div className="order-2 lg:hidden">
               <Button
                 asChild
                 className="h-12 w-full rounded-full text-base font-semibold"
@@ -112,7 +114,7 @@ export function HeroSection({
               </Button>
             </div>
 
-            <div className="space-y-2 text-base font-medium leading-none [&_p]:m-0 [&_p]:leading-none [&_p]:!text-foreground">
+            <div className="order-1 space-y-2 text-xs font-medium leading-none lg:order-2 lg:text-base [&_p]:m-0 [&_p]:leading-none [&_p]:!text-foreground">
               {landingPage?.deliveryInfo ? (
                 <PortableTextRenderer
                   value={landingPage.deliveryInfo}
