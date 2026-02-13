@@ -56,7 +56,7 @@ export function SiteFooter({
 
   return (
     <footer id="kontakt" className="relative mt-24 bg-brand text-white">
-      <div className="pointer-events-none absolute -top-36 right-0 z-0 w-[300px] sm:-top-48 sm:w-[420px] lg:-top-72 lg:w-[520px]">
+      <div className="pointer-events-none absolute -top-36 right-24 z-0 w-[300px] sm:-top-48 sm:w-[420px] lg:-top-72 lg:w-[520px]">
         <Image
           src="/goat-milk-bottle-goat-white-background%201.png"
           alt=""

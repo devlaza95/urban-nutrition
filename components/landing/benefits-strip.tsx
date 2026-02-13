@@ -54,7 +54,7 @@ export function BenefitsStrip() {
         </h2>
       </div>
 
-      <div className="relative left-1/2 mt-6 w-screen -translate-x-1/2 bg-[#DAD7FF]">
+      <div className="relative mt-6 w-full bg-[#DAD7FF]">
         <Image
           src={goatImage}
           alt=""

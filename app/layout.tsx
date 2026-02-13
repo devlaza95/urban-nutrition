@@ -3,6 +3,7 @@ import "./globals.css";
 import { anton, geistMono, geistSans, inter } from "@/lib/fonts";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { TrackingProvider } from "@/components/tracking/tracking-provider";
 import { sanityClient } from "@/lib/sanity/client";
 import { landingPageQuery } from "@/lib/sanity/queries";
 import type { LandingPage } from "@/lib/sanity/types";
@@ -93,9 +94,11 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} ${inter.variable} antialiased`}
       >
-        <SiteHeader />
-        {children}
-        <SiteFooter landingPage={landingPage} />
+        <TrackingProvider>
+          <SiteHeader />
+          {children}
+          <SiteFooter landingPage={landingPage} />
+        </TrackingProvider>
       </body>
     </html>
   );
